@@ -5,16 +5,16 @@
  */
 package presentacion;
 
-import BaseDatos.CRUD;
 import BaseDatos.ConeccionBaseDatos;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static presentacion.Tabla.tabla;
+
 
 /**
  *
@@ -308,7 +308,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(416, 416, 416)
+                        .addGap(401, 401, 401)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,7 +343,7 @@ public class Menu extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(noOscarCancion)
                                         .addGap(47, 47, 47)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButtonMostrar)
@@ -531,84 +531,97 @@ public class Menu extends javax.swing.JFrame {
         tabla.setRowCount(0); //para limpiar los datos de la tabla filas
         SubMenu objSubMenu = new SubMenu();
         Login objLogin = new Login();
-        if (objLogin.PrivilegioUsuario){//PrivilegioUsuario es true bloquea las opciones del SubMenu para invitado
+        if (objLogin.PrivilegioUsuario) {//PrivilegioUsuario es true bloquea las opciones del SubMenu para invitado
             objSubMenu.bloquearUsuarioSubMenu();
-         }
+        }
         objSubMenu.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButtonSubmenuActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-               if (jTxId.getText().equals("")) {
+        if (jTxId.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "El campo ID esta vacio");
-        }else{
-            String option [] = {"Eliminar","Cancelar"};
+        } else {
+            String option[] = {"Eliminar", "Cancelar"};
             int elegir = JOptionPane.showOptionDialog(rootPane, "Desea Eliminar", "Modificar", 0, 0, null, option, rootPane);
             if (elegir == JOptionPane.YES_NO_OPTION) {
-                                   JOptionPane.showMessageDialog(null,"entro");
-                String eliminar = "DELETE From Principal WHERE Id="+this.jTxId.getText();
-                     ConeccionBaseDatos conbase = new ConeccionBaseDatos();
-                try { 
+                JOptionPane.showMessageDialog(null, "entro");
+                String eliminar = "DELETE From Principal WHERE Id=" + this.jTxId.getText();
+                ConeccionBaseDatos conbase = new ConeccionBaseDatos();
+                try {
                     conbase.sentencia.executeUpdate(eliminar);
                 } catch (SQLException ex) {
                     Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                    JOptionPane.showMessageDialog(null,"Eliminacion exitoso");
+                JOptionPane.showMessageDialog(null, "Eliminacion exitoso");
 //                    initComponents();
-                    tabla.setColumnCount(0); //para limpiar los datos de la tabla columnas
-                    tabla.setRowCount(0); //para limpiar los datos de la tabla filas
-                    cargarTitulosColumas();
-                    cargarDatos();
-            }else{
-               if (elegir == JOptionPane.NO_OPTION) {
-                   JOptionPane.showMessageDialog(rootPane, "No se hizo la Eliminacion");
-               }       
+                tabla.setColumnCount(0); //para limpiar los datos de la tabla columnas
+                tabla.setRowCount(0); //para limpiar los datos de la tabla filas
+                cargarTitulosColumas();
+                cargarDatos();
+            } else {
+                if (elegir == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(rootPane, "No se hizo la Eliminacion");
+                }
             }
-        }    
+        }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
-        String sql = "Select* From Principal Where Id="+this.jTxId.getText();
-        try {
-            ConeccionBaseDatos conbase = new ConeccionBaseDatos();
-            ResultSet resultado = conbase.sentencia.executeQuery(sql);
-            if (resultado.next()) {
-                this.nombrePelicula.setText(resultado.getString("Nombre_pelicula"));
-                this.añoCreacionPelicula.setText(resultado.getString("Año_Creacion"));
-                this.directorPelicula.setText(resultado.getString("Director"));
-                this.linkIMDB.setText(resultado.getString("Link_IBDM"));
-                this.generoPelicula.setText(resultado.getString("Genero"));
-                this.nombreSoundtrack.setText(resultado.getString("Soundtranck"));
-                this.interpreteSoundtrack.setText(resultado.getString("Interprete_Sound"));
-                this.totalPistas.setText(resultado.getString("Pistas"));
-                if (resultado.getString("Oscar_Cancion").equalsIgnoreCase("SI")) {
-                    this.siiOscarCancion.setSelected(true);
-                    this.noOscarCancion.setSelected(false);
-                }else{
-                    this.noOscarCancion.setSelected(true);
-                    this.siiOscarCancion.setSelected(false);
-                }
+        if (jTxId.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "El campo ID esta vacio");
+        } else {
+            String sql = "Select* From Principal Where Id=" + this.jTxId.getText();
+            try {
+                ConeccionBaseDatos conbase = new ConeccionBaseDatos();
+                ResultSet resultado = conbase.sentencia.executeQuery(sql);
+                if (resultado.next()) {
+                    this.nombrePelicula.setText(resultado.getString("Nombre_pelicula"));
+                    this.añoCreacionPelicula.setText(resultado.getString("Año_Creacion"));
+                    this.directorPelicula.setText(resultado.getString("Director"));
+                    this.linkIMDB.setText(resultado.getString("Link_IBDM"));
+                    this.generoPelicula.setText(resultado.getString("Genero"));
+                    this.nombreSoundtrack.setText(resultado.getString("Soundtranck"));
+                    this.interpreteSoundtrack.setText(resultado.getString("Interprete_Sound"));
+                    this.totalPistas.setText(resultado.getString("Pistas"));
+                    if (resultado.getString("Oscar_Cancion").equalsIgnoreCase("SI")) {
+                        this.siiOscarCancion.setSelected(true);
+                        this.noOscarCancion.setSelected(false);
+                    } else {
+                        this.noOscarCancion.setSelected(true);
+                        this.siiOscarCancion.setSelected(false);
+                    }
 //                this.siOscarBanda.setText(resultado.getString("Oscar_Cancion"));
-                this.bandaSonora.setText(resultado.getString("Banda_Sonora"));
-                this.interpreteBanda.setText(resultado.getString("Inteprete_Banda"));
-                this.autorBanda.setText(resultado.getString("Autor"));
-                if (resultado.getString("Oscar_Banda").equalsIgnoreCase("SI")) {
-                    this.siOscarBanda.setSelected(true);
-                    this.noOscarBanda.setSelected(false);
-                }else{
-                    this.noOscarBanda.setSelected(true);
-                    this.siOscarBanda.setSelected(false);
-                }
+                    respOscarCancion = resultado.getString("Oscar_Cancion");
+                    respOscarBanda = resultado.getString("Oscar_Banda");
+                    this.bandaSonora.setText(resultado.getString("Banda_Sonora"));
+                    this.interpreteBanda.setText(resultado.getString("Inteprete_Banda"));
+                    this.autorBanda.setText(resultado.getString("Autor"));
+                    if (resultado.getString("Oscar_Banda").equalsIgnoreCase("SI")) {
+                        this.siOscarBanda.setSelected(true);
+                        this.noOscarBanda.setSelected(false);
+                    } else {
+                        this.noOscarBanda.setSelected(true);
+                        this.siOscarBanda.setSelected(false);
+                    }
 //                this.siOscarBanda.setText(resultado.getString("Oscar_Banda"));
-            }else {
-                JOptionPane.showMessageDialog(null,"La id no existe");
+                } else {
+                    JOptionPane.showMessageDialog(null, "La id no existe");
+                }
+            } catch (SQLException ex) {
+                //Mensaje que saldrá cuando ocurra un error al ingresar los datos
+                JOptionPane.showMessageDialog(null, "Error, sus datos no fueron ingresados\n" + ex);
             }
-        } catch (SQLException ex) {
-             //Mensaje que saldrá cuando ocurra un error al ingresar los datos
-            JOptionPane.showMessageDialog(null, "Error, sus datos no fueron ingresados\n" + ex);
         }
     }//GEN-LAST:event_jButtonMostrarActionPerformed
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        if (this.nombrePelicula.getText().equals("")||this.añoCreacionPelicula.getText().equals("")|| this.directorPelicula.getText().equals("")
+                ||this.linkIMDB.getText().equals("")||this.generoPelicula.getText().equals("")||this.nombreSoundtrack.getText().equals("")
+                ||this.interpreteSoundtrack.getText().equals("")||this.totalPistas.getText().equals("")||this.bandaSonora.getText().equals("")
+                ||this.interpreteBanda.getText().equals("")||this.autorBanda.getText().equals("")||this.respOscarCancion.equals("")
+                ||this.respOscarBanda.equals("")) {
+            JOptionPane.showMessageDialog(null, "Hay campos vacidos, vuelva a intentar");
+        }else{
         String nombrePelicula = this.nombrePelicula.getText();
         String AñoPelicula = this.añoCreacionPelicula.getText();
         String DirectorPelicula = this.directorPelicula.getText();
@@ -638,6 +651,8 @@ public class Menu extends javax.swing.JFrame {
         tabla.setRowCount(0); //para limpiar los datos de la tabla filas
         cargarTitulosColumas();
         cargarDatos();
+        JOptionPane.showMessageDialog(null, "Sountrank agregado");
+        }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
@@ -788,22 +803,25 @@ public class Menu extends javax.swing.JFrame {
             ConeccionBaseDatos objConeccionBaseDatos = new ConeccionBaseDatos();
             ResultSet resultado = objConeccionBaseDatos.sentencia.executeQuery(sql);  //Linea que ejecuta la consulta sql y almacena los datos en resultado
             while (resultado.next()) {                                    //Bucle que recorre la consulta obtenida
-                String datos[] = new String[14]; 
-                datos[0] = resultado.getString("Id");
-                datos[1] = resultado.getString("Nombre_pelicula");
-                datos[2] = resultado.getString("Año_Creacion");
-                datos[3] = resultado.getString("Director");
-                datos[4] = resultado.getString("Link_IBDM");
-                datos[5] = resultado.getString("Genero");
-                datos[6] = resultado.getString("Soundtranck");
-                datos[7] = resultado.getString("Interprete_Sound");
-                datos[8] = resultado.getString("Pistas");
-                datos[9] = resultado.getString("Oscar_Cancion");
-                datos[10] = resultado.getString("Banda_Sonora");
-                datos[11] = resultado.getString("Inteprete_Banda");
-                datos[12] = resultado.getString("Autor");
-                datos[13] = resultado.getString("Oscar_Banda");
-                tabla.addRow(datos);
+//                String datos[] = new String[14]; 
+                ArrayList<String> datos = new ArrayList<>();
+                datos.add(resultado.getString("Id"));
+                datos.add(resultado.getString("Nombre_pelicula"));
+                datos.add(resultado.getString("Año_Creacion"));
+                datos.add(resultado.getString("Director"));
+                datos.add(resultado.getString("Link_IBDM"));
+                datos.add(resultado.getString("Genero"));
+                datos.add(resultado.getString("Soundtranck"));
+                datos.add(resultado.getString("Interprete_Sound"));
+                datos.add(resultado.getString("Pistas"));
+                datos.add(resultado.getString("Oscar_Cancion"));
+                datos.add(resultado.getString("Banda_Sonora"));
+                datos.add(resultado.getString("Inteprete_Banda"));
+                datos.add(resultado.getString("Autor"));
+                datos.add(resultado.getString("Oscar_Banda"));
+                datos.add(resultado.getString("Director"));
+                datos.add(resultado.getString("Director"));
+                tabla.addRow(datos.toArray());
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar los Datos\n" + ex);

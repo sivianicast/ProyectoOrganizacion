@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author siviany
  */
 public class Login extends javax.swing.JFrame {
-    public static boolean PrivilegioUsuario = false;
+    public boolean PrivilegioUsuario = false;
     /**
      * Creates new form Login
      */
