@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
  * @author siviany
  */
 public class Login extends javax.swing.JFrame {
+
     public boolean PrivilegioUsuario = false;
+
     /**
      * Creates new form Login
      */
@@ -114,7 +116,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void jEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEntrarActionPerformed
-       
+
         accesoClientes();
     }//GEN-LAST:event_jEntrarActionPerformed
 
@@ -164,7 +166,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
-    public void accesoClientes (){
+    public void accesoClientes() {
         String administrador = "admin";
         String contraseñaAdmnistrador = "1234";
         String contraseñaUsuario = "123";
@@ -174,13 +176,13 @@ public class Login extends javax.swing.JFrame {
         if (txtUsuario.getText().equals(administrador) && pass.equals(contraseñaAdmnistrador)
                 || txtUsuario.getText().equals(usuario) && pass.equals(contraseñaUsuario)) {//validacion de usuarios 
             if (txtUsuario.getText().equals(usuario)) {
-            objMenu.bloqueoUsuario(); //llama el metodo que bloquea las opciones de menu 
-            PrivilegioUsuario = true;
+                objMenu.bloqueoUsuario(); //llama el metodo que bloquea las opciones de menu 
+                PrivilegioUsuario = true;
             }
             objMenu.setVisible(true);
             dispose();//cierra la pantalla actual
         } else {
             JOptionPane.showMessageDialog(null, "La contraseña o el usuario son incorrectos");
         }
-    }    
+    }
 }
