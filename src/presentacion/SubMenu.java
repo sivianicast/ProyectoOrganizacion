@@ -324,8 +324,8 @@ public class SubMenu extends javax.swing.JFrame {
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         Menu menu = new Menu();
-        if (this.txtAlbum.getText().equals("") || this.txtArtista.getText().equals("") || this.txtCancion.getText().equals("") || this.txtGenero.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay campos vacidos, vuelva a intentar");
+        if (this.txtCancion.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Al menos ingrese el nombre de la cancion");
         } else {
             String sql = "insert into Canciones(ids,Cancion,Album,Artista,Genero) values " + "('"
                     + Menu.idSountrack + "','"
@@ -534,10 +534,10 @@ public class SubMenu extends javax.swing.JFrame {
     }
 
     public void maxlength2(String txtFiled, java.awt.event.KeyEvent evt) {
-        int maximoTamaño = 15;
+        int maximoTamaño = 25;
         if (txtFiled.length() >= maximoTamaño) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Maximo 15 caracteres");
+            JOptionPane.showMessageDialog(null, "Maximo 25 caracteres");
         }
     }
 }

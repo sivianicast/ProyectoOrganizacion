@@ -6,6 +6,7 @@
 package presentacion;
 
 import BaseDatos.ConeccionBaseDatos;
+import BaseDatos.Reportes;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -104,6 +105,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
+        reportes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -387,6 +389,13 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel17.setText("Ingrese id superior y mostrar para luego ir al Menu Canciones");
 
+        reportes.setText("Reportes totales");
+        reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -399,15 +408,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel17))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(nombrePelicula, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(id)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -415,14 +416,30 @@ public class Menu extends javax.swing.JFrame {
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6)
                                     .addComponent(jBottonVoverLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(linkIMDB, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(directorPelicula, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(añoCreacionPelicula, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(generoPelicula)))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(64, 64, 64)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(46, 46, 46)
+                                        .addComponent(reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(añoCreacionPelicula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(linkIMDB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(generoPelicula))))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                    .addComponent(nombrePelicula)))
+                            .addComponent(directorPelicula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -545,7 +562,8 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jBottonVoverLogin)
                     .addComponent(jButtonGuardar)
                     .addComponent(jButton1)
-                    .addComponent(jButtonSubmenu))
+                    .addComponent(jButtonSubmenu)
+                    .addComponent(reportes))
                 .addGap(25, 25, 25))
         );
 
@@ -680,8 +698,11 @@ public class Menu extends javax.swing.JFrame {
                     if (resultado.getString("Oscar_Cancion").equalsIgnoreCase("SI")) {
                         this.siiOscarCancion.setSelected(true);
                         this.noOscarCancion.setSelected(false);
-                    } else {
+                    } else if (resultado.getString("Oscar_Cancion").equalsIgnoreCase("NO")) {
                         this.noOscarCancion.setSelected(true);
+                        this.siiOscarCancion.setSelected(false);
+                    }else{                         
+                        this.noOscarCancion.setSelected(false);
                         this.siiOscarCancion.setSelected(false);
                     }
                     respOscarCancion = resultado.getString("Oscar_Cancion");
@@ -692,9 +713,12 @@ public class Menu extends javax.swing.JFrame {
                     if (resultado.getString("Oscar_Banda").equalsIgnoreCase("SI")) {
                         this.siOscarBanda.setSelected(true);
                         this.noOscarBanda.setSelected(false);
-                    } else {
+                    } else if (resultado.getString("Oscar_Banda").equalsIgnoreCase("NO")) {
                         this.noOscarBanda.setSelected(true);
                         this.siOscarBanda.setSelected(false);
+                    }else{
+                        this.noOscarBanda.setSelected(false);
+                        this.siOscarBanda.setSelected(false);    
                     }
                     this.jButtonSubmenu.setEnabled(true);
                 } else {
@@ -708,12 +732,8 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonMostrarActionPerformed
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        if (this.id.getText().equals("") || this.nombrePelicula.getText().equals("") || this.añoCreacionPelicula.getText().equals("") || this.directorPelicula.getText().equals("")
-                || this.linkIMDB.getText().equals("") || this.generoPelicula.getText().equals("") || this.nombreSoundtrack.getText().equals("")
-                || this.interpreteSoundtrack.getText().equals("") || this.totalPistas.getText().equals("") || this.bandaSonora.getText().equals("")
-                || this.interpreteBanda.getText().equals("") || this.autorBanda.getText().equals("") || this.respOscarCancion.equals("")
-                || this.respOscarBanda.equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay campos vacidos, vuelva a intentar");
+        if (this.id.getText().equals("") || this.nombrePelicula.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Ingrese id para el sistema y nombre de pelicula");
         } else {
             String idSountrack = this.id.getText();
             String nombrePelicula = this.nombrePelicula.getText();
@@ -848,6 +868,10 @@ public class Menu extends javax.swing.JFrame {
         maxlength(this.autorBanda.getText(), evt);
     }//GEN-LAST:event_autorBandaKeyTyped
 
+    private void reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesActionPerformed
+        Reportes repote = new Reportes();
+    }//GEN-LAST:event_reportesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -929,6 +953,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JRadioButton noOscarCancion;
     private javax.swing.JTextField nombrePelicula;
     private javax.swing.JTextField nombreSoundtrack;
+    private javax.swing.JButton reportes;
     private javax.swing.JRadioButton siOscarBanda;
     private javax.swing.JRadioButton siiOscarCancion;
     private javax.swing.JTextField totalPistas;
@@ -1008,10 +1033,10 @@ public class Menu extends javax.swing.JFrame {
     }
 
     public void maxlength(String txtFiled, java.awt.event.KeyEvent evt) {
-        int maximoTamaño = 20;
+        int maximoTamaño = 30;
         if (txtFiled.length() >= maximoTamaño) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Maximo 20 caracteres");
+            JOptionPane.showMessageDialog(null, "Maximo 30 caracteres");
         }
     }
 }

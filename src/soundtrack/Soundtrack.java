@@ -21,7 +21,7 @@ public class Soundtrack {
     public static void main(String[] args) {
         ConeccionBaseDatos objConeccionBaseDatos = new ConeccionBaseDatos();
         objConeccionBaseDatos.conexion();
-        Login objLogin = new Login();
-        objLogin.setVisible(true);
+        Login login = new Login ();
+        login.setVisible(true);
     }
 }
