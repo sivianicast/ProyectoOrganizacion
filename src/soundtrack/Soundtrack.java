@@ -14,7 +14,7 @@ import presentacion.Menu;
  * @author siviany
  */
 public class Soundtrack {
-
+ public static boolean PrivilegioUsuario;
     /**
      * @param args the command line arguments
      */

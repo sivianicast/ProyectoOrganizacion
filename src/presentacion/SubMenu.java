@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static presentacion.Menu.tabla;
+import soundtrack.Soundtrack;
 
 /**
  *
@@ -31,8 +32,7 @@ public class SubMenu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         cargarTitulosColumas();
         cargarDatos();
-        Login x = new Login();
-        if (!x.PrivilegioUsuario) {
+        if (Soundtrack.PrivilegioUsuario) {
             bloquearUsuarioSubMenu();
         }
     }
@@ -314,10 +314,10 @@ public class SubMenu extends javax.swing.JFrame {
         tabla.setColumnCount(0); //para limpiar los datos de la tabla columnas
         tabla.setRowCount(0); //para limpiar los datos de la tabla filas
         Menu objMenu = new Menu();
-        Login objLogin = new Login();
-        if (objLogin.PrivilegioUsuario) {//PrivilegioUsuario es true bloquea el menu opciones del menu para invitado
-            objMenu.bloqueoUsuario();
-        }
+//        Login objLogin = new Login();
+//        if (Soundtrack.PrivilegioUsuario) {//PrivilegioUsuario es true bloquea el menu opciones del menu para invitado
+//            objMenu.bloqueoUsuario();
+//        }
         objMenu.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButtonVolverActionPerformed

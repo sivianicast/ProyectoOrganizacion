@@ -6,6 +6,8 @@
 package presentacion;
 
 import javax.swing.JOptionPane;
+import static presentacion.Menu.tabla;
+import soundtrack.Soundtrack;
 
 /**
  *
@@ -13,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    public boolean PrivilegioUsuario = false;
+   
 
     /**
      * Creates new form Login
@@ -172,13 +174,19 @@ public class Login extends javax.swing.JFrame {
         String contraseñaUsuario = "123";
         String usuario = "invitado";
         String pass = new String(txtPassword.getPassword()); //convertir el txtpassword a string
-        Menu objMenu = new Menu();
+        tabla.setColumnCount(0); //para limpiar los datos de la tabla columnas
+        tabla.setRowCount(0); //para limpiar los datos de la tabla filas
+       
+        
         if (txtUsuario.getText().equals(administrador) && pass.equals(contraseñaAdmnistrador)
                 || txtUsuario.getText().equals(usuario) && pass.equals(contraseñaUsuario)) {//validacion de usuarios 
             if (txtUsuario.getText().equals(usuario)) {
-                objMenu.bloqueoUsuario(); //llama el metodo que bloquea las opciones de menu 
-                PrivilegioUsuario = true;
+//                objMenu.bloqueoUsuario(); //llama el metodo que bloquea las opciones de menu 
+               Soundtrack.PrivilegioUsuario = true;
+            }else{
+                Soundtrack.PrivilegioUsuario = false;
             }
+            Menu objMenu = new Menu();
             objMenu.setVisible(true);
             dispose();//cierra la pantalla actual
         } else {

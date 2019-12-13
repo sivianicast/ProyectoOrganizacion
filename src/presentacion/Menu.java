@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
+import soundtrack.Soundtrack;
 
 /**
  *
@@ -41,9 +42,8 @@ public class Menu extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         cargarTitulosColumas();
         cargarDatos();
-        Login x = new Login();
-        if (x.PrivilegioUsuario) {
-            bloqueoUsuario();
+        if (Soundtrack.PrivilegioUsuario) {
+           this.bloqueoUsuario();
         }
         this.jButtonSubmenu.setEnabled(false);
     }

@@ -9,8 +9,8 @@ import java.awt.HeadlessException;
 import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 /**
  *
  * @author siviany
